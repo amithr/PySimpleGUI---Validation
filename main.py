@@ -17,27 +17,6 @@ layout = [[sg.Text("Enter full name:"), sg.Input(key='-NAME-', do_not_clear=True
 
 window = sg.Window('привет Airlines', layout)
 
-def format_input_information(values):
-    information = "Flight booked!"
-    name = '\nName: ' + values['-NAME-']
-    information += name
-    passport_number = '\nPassport Number: ' + values['-PASSPORT_NUMBER-']
-    information += passport_number
-    gender = '\nGender: ' 
-    if values['-FEMALE-']: 
-        gender += 'Female'
-    else: 
-        gender += 'Male'
-    information += gender
-    departure_time = '\nDeparture Time: ' + values['-DEPARTURE-']
-    information += departure_time
-    arrival_time = '\nArrival Time: ' + values['-ARRIVAL-']
-    information += arrival_time
-    # Listbox will return an array of 1 element because it's marked as 'single', otherwise it would return a larger array
-    destination = '\nDestination: ' + values['-DESTINATION-'][0]
-    information += destination
-    
-    return information
 
 # This is to make sure that the arrival date is not before the departure date
 def is_arrival_before_departure(departure_string, arrival_string):
@@ -96,7 +75,7 @@ while True:
     elif event == 'Reserve Ticket':
         validation_result = validate(values)
         if validation_result[0]:
-            sg.popup(format_input_information(values))
+            sg.popup('Flight Reservation submitted!')
         else:
             error_message = generate_error_message(validation_result[1])
             sg.popup(error_message)
