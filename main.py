@@ -44,11 +44,15 @@ def validate(values):
         is_valid = False
 
     if len(values['-DEPARTURE-']) == 0:
-        values_invalid.append('Departure Time')
+        values_invalid.append('Departure Date')
         is_valid = False
-
-    if len(values['-ARRIVAL-']) and is_arrival_before_departure(values['-DEPARTURE-'], values['-ARRIVAL-']):
-        values_invalid.append('Arrival Time')
+    
+    if len(values['-ARRIVAL-']) == 0: 
+        values_invalid.append('Arrival Date')
+        is_valid = False
+    
+    if len(values['-DEPARTURE-']) != 0 and len(values['-ARRIVAL-']) != 0 and is_arrival_before_departure(values['-DEPARTURE-'], values['-ARRIVAL-']):
+        values_invalid.append('Arrival Date comes before Departure Date')
         is_valid = False
         
     # This is how you handle a case when an error may occur
